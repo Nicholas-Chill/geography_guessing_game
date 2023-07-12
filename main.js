@@ -1,16 +1,30 @@
-image_array = [
+let imageArray = [
+    'canada.png',
+    'iceland.png',
+    'namibia.png',
+    'philippines.png',
+    'seychelles.png',
     'sweden.png',
+    'tanzania.png',
     'usa.png'
 ];
+
+let flagsShown = []
+
 getRandomFlag();
 let flag = document.getElementsByTagName("img");
 let flagForm = document.getElementById("guessFlag");
 console.log(flag[0].id);
 
 function getRandomFlag() {
-    let random_index = Math.floor(Math.random() * image_array.length);
-    let selected_image = image_array[random_index];
-    document.getElementById("flag").src = `./flags/${selected_image}`;
+    console.log(flagsShown);
+    let randomIndex = Math.floor(Math.random() * imageArray.length);
+    while(flagsShown.includes(randomIndex)) {
+        randomIndex = Math.floor(Math.random * imageArray.length);
+    }
+    let selectedImage = imageArray[randomIndex];
+    document.getElementById("flag").src = `./flags/${selectedImage}`;
+    flagsShown.push(randomIndex);
 }
 
 function checkGuess() {
