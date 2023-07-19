@@ -1,7 +1,10 @@
 let flagArray = [
     'canada.png',
+    'denmark.png',
+    'finland.png',
     'iceland.png',
     'namibia.png',
+    'norway.png',
     'philippines.png',
     'seychelles.png',
     'sweden.png',
@@ -26,13 +29,15 @@ function getRandomFlag() {
         console.log(selectedFlag);
         document.getElementById("flag").src = `./flags/${selectedFlag}`;
         flagsShown.push(randomIndex);
+    } else {
+        console.log("All flags guessed correctly!");
+        document.getElementById("win").src = `./win.png`;
     }
 }
 
 function checkGuess() {
     event.preventDefault();
     const guess = document.getElementById("guess").value.toLowerCase().concat('.png');
-    console.log(guess);
     if (guess == flagArray[flagsShown[flagsShown.length - 1]]) {
         getRandomFlag();
     }
