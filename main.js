@@ -1,4 +1,4 @@
-let imageArray = [
+let flagArray = [
     'canada.png',
     'iceland.png',
     'namibia.png',
@@ -14,28 +14,29 @@ let flagsShown = []
 getRandomFlag();
 let flag = document.getElementsByTagName("img");
 let flagForm = document.getElementById("guessFlag");
-console.log(flag[0].id);
 
 function getRandomFlag() {
-    console.log(flagsShown);
-    let randomIndex = Math.floor(Math.random() * imageArray.length);
-    while(flagsShown.includes(randomIndex)) {
-        randomIndex = Math.floor(Math.random * imageArray.length);
+    if (flagsShown.length != flagArray.length) {
+        let randomIndex = Math.floor(Math.random() * flagArray.length);
+        while (flagsShown.includes(randomIndex)) {
+            randomIndex = Math.floor(Math.random() * flagArray.length);
+        }
+
+        let selectedFlag = flagArray[randomIndex];
+        console.log(selectedFlag);
+        document.getElementById("flag").src = `./flags/${selectedFlag}`;
+        flagsShown.push(randomIndex);
     }
-    let selectedImage = imageArray[randomIndex];
-    document.getElementById("flag").src = `./flags/${selectedImage}`;
-    flagsShown.push(randomIndex);
 }
 
 function checkGuess() {
     event.preventDefault();
-    const guess = document.getElementById("guess").value.toLowerCase();
-    console.log("Guess: " + guess);
-    if(guess == flag[0].id) {
-        console.log("Correct");
-    } else {
-        console.log("Wrong");
+    const guess = document.getElementById("guess").value.toLowerCase().concat('.png');
+    console.log(guess);
+    if (guess == flagArray[flagsShown[flagsShown.length - 1]]) {
+        getRandomFlag();
     }
     flagForm.reset();
 }
+
 document.getElementById("submitGuess").addEventListener('click', checkGuess);
