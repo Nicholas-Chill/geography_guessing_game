@@ -1,7 +1,7 @@
 let flagArray = [
     'canada.png',
-    'denmark.png',
-    'finland.png',
+    'denmark.png'
+    /*'finland.png',
     'iceland.png',
     'namibia.png',
     'norway.png',
@@ -9,7 +9,7 @@ let flagArray = [
     'seychelles.png',
     'sweden.png',
     'tanzania.png',
-    'usa.png'
+    'usa.png'*/
 ];
 
 let flagsShown = []
@@ -17,6 +17,8 @@ let flagsShown = []
 getRandomFlag();
 let flag = document.getElementsByTagName("img");
 let flagForm = document.getElementById("guessFlag");
+let trophyImage = document.getElementById("win");
+trophyImage.style.display = "none";
 
 function getRandomFlag() {
     if (flagsShown.length != flagArray.length) {
@@ -30,8 +32,7 @@ function getRandomFlag() {
         document.getElementById("flag").src = `./flags/${selectedFlag}`;
         flagsShown.push(randomIndex);
     } else {
-        console.log("All flags guessed correctly!");
-        document.getElementById("win").src = `./win.png`;
+        trophyImage.style.display = "block";
     }
 }
 
