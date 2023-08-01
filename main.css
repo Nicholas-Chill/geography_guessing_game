@@ -1,0 +1,12 @@
+#score {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+}
+
+#guess-flag-game {
+    text-align: center;
+}
+
+body {
+    background-color: azure;
+}

@@ -11,13 +11,16 @@
         <a href="index.html" style="text-decoration: none;">Homepage</a>
         <a href="guess_flag.html" style="text-decoration: none;">Guess The Flag</a>
     </nav>
-    <h1>Guess The Flag</h1>
+    <div id="guess-flag-game">
+    <h1 id="game-title">Guess The Flag</h1>
+    <p id="score">Score: 0/11</p>
     <img alt="flag" width="192" height="117" id="flag">
     <form id="guessFlag">
         <input type="text" id="guess" name="guess">
         <input type="submit" id="submitGuess" value="Guess">
     </form>
     <img src =win.png width="200" height="200" id="win">
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
