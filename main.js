@@ -1,14 +1,17 @@
 let flagArray = [
-    /*'canada.png',
+    'canada.png',
     'denmark.png',
     'finland.png',
+    'france.png',
+    'germany.png',
     'iceland.png',
+    'mexico.png',
     'namibia.png',
     'norway.png',
     'philippines.png',
     'seychelles.png',
     'sweden.png',
-    'tanzania.png',*/
+    'tanzania.png',
     'usa.png'
 ];
 
