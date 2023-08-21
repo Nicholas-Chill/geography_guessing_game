@@ -27,6 +27,8 @@ trophyImage.style.display = "none";
 
 let score = 0;
 
+let seconds = 0;
+
 function getRandomFlag() {
     if (flagsShown.length != flagArray.length) {
         let randomIndex = Math.floor(Math.random() * flagArray.length);
@@ -62,5 +64,12 @@ function increaseScore() {
 function hideCheckMark() {
     checkMark.style.display = "none";
 }
+
+function timer() {
+    seconds += 1;
+    document.getElementById("seconds").innerHTML = `Time: 00:${seconds}`;
+}
+
+setInterval(timer, 1000);
 
 document.getElementById("submitGuess").addEventListener('click', checkGuess);
