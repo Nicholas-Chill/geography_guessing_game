@@ -1,5 +1,5 @@
 let flagArray = [
-    'canada.png',
+    /*'canada.png',
     'denmark.png',
     'finland.png',
     'france.png',
@@ -11,7 +11,7 @@ let flagArray = [
     'philippines.png',
     'seychelles.png',
     'sweden.png',
-    'tanzania.png',
+    'tanzania.png',*/
     'usa.png'
 ];
 
@@ -37,7 +37,6 @@ function getRandomFlag() {
         }
 
         let selectedFlag = flagArray[randomIndex];
-        console.log(selectedFlag);
         document.getElementById("flag").src = `./flags/${selectedFlag}`;
         flagsShown.push(randomIndex);
     } else {
@@ -59,6 +58,7 @@ function checkGuess() {
 
 function increaseScore() {
     document.getElementById("score").innerHTML = `Score: ${score += 1}/${flagArray.length}`;
+    console.log(score);
 }
 
 function hideCheckMark() {
@@ -67,9 +67,19 @@ function hideCheckMark() {
 
 function timer() {
     seconds += 1;
-    document.getElementById("seconds").innerHTML = `Time: 00:${seconds}`;
+    if(seconds == 60) {
+        seconds = 0;
+    }
+    document.getElementById("seconds").innerHTML = `Time: 00:0${seconds}`;
 }
 
-setInterval(timer, 1000);
+if(score != flagArray.length) {
+    setInterval(timer, 1000);
+    console.log(flagArray.length);
+    console.log("score: " + score);
+} else {
+    console.log(flagArray.length);
+    console.log("score: " + score);
+}
 
 document.getElementById("submitGuess").addEventListener('click', checkGuess);
