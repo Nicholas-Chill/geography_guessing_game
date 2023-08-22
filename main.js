@@ -28,6 +28,10 @@ trophyImage.style.display = "none";
 let score = 0;
 
 let seconds = 0;
+let minutes = 0;
+
+console.log(flagArray.length);
+console.log(score);
 
 function getRandomFlag() {
     if (flagsShown.length != flagArray.length) {
@@ -69,8 +73,9 @@ function timer() {
     seconds += 1;
     if(seconds == 60) {
         seconds = 0;
+        minutes += 1;
     }
-    document.getElementById("seconds").innerHTML = `Time: 00:0${seconds}`;
+    document.getElementById("seconds").innerHTML = `Time: 0${minutes}:0${seconds}`;
 }
 
 if(score != flagArray.length) {
@@ -78,6 +83,7 @@ if(score != flagArray.length) {
     console.log(flagArray.length);
     console.log("score: " + score);
 } else {
+    setInterval(timer, 0);
     console.log(flagArray.length);
     console.log("score: " + score);
 }
