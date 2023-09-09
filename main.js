@@ -6,10 +6,10 @@ let flagArray = [
     'germany.png',
     'iceland.png',
     'mexico.png',
-    'namibia.png',
+    //'namibia.png',
     'norway.png',
-    'philippines.png',
-    'seychelles.png',
+    //'philippines.png',
+    //'seychelles.png',
     'sweden.png',
     'tanzania.png',*/
     'usa.png'
@@ -27,11 +27,12 @@ trophyImage.style.display = "none";
 
 let score = 0;
 
-let seconds = 0;
-let minutes = 0;
+let seconds1 = 0;
+let seconds2 = 0;
+let minutes1 = 0;
+let minutes2 = 0;
 
-console.log(flagArray.length);
-console.log(score);
+let clock = setInterval(timer, 1000);
 
 function getRandomFlag() {
     if (flagsShown.length != flagArray.length) {
@@ -44,6 +45,7 @@ function getRandomFlag() {
         document.getElementById("flag").src = `./flags/${selectedFlag}`;
         flagsShown.push(randomIndex);
     } else {
+        clearInterval(clock);
         trophyImage.style.display = "inline-flex";
     }
 }
@@ -70,22 +72,22 @@ function hideCheckMark() {
 }
 
 function timer() {
-    seconds += 1;
-    if(seconds == 60) {
-        seconds = 0;
-        minutes += 1;
+    if(minutes2 == 9 && seconds1 == 5 && seconds2 == 9) {
+        minutes1++;
+        minutes2 = 0;
+        seconds1 = 0;
+        seconds2 = 0;
+    } else if(seconds1 == 5 && seconds2 == 9) {
+        minutes2++;
+        seconds1 = 0;
+        seconds2 = 0;
+    } else if(seconds2 == 9) {
+        seconds1++;
+        seconds2 = 0;
+    } else {
+        seconds2++;
     }
-    document.getElementById("seconds").innerHTML = `Time: 0${minutes}:0${seconds}`;
-}
-
-if(score != flagArray.length) {
-    setInterval(timer, 1000);
-    console.log(flagArray.length);
-    console.log("score: " + score);
-} else {
-    setInterval(timer, 0);
-    console.log(flagArray.length);
-    console.log("score: " + score);
+    document.getElementById("timer").innerHTML = `Time: ${minutes1}${minutes2}:${seconds1}${seconds2}`;
 }
 
 document.getElementById("submitGuess").addEventListener('click', checkGuess);
