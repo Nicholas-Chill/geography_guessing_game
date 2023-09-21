@@ -1,17 +1,22 @@
 let flagArray = [
-    /*'canada.png',
+    'canada.png',
     'denmark.png',
+    'eswatini.png',
     'finland.png',
     'france.png',
     'germany.png',
     'iceland.png',
     'mexico.png',
-    //'namibia.png',
+    'mozambique.png',
+    'namibia.png',
+    'netherlands.png',
     'norway.png',
-    //'philippines.png',
-    //'seychelles.png',
+    'philippines.png',
+    'russia.png',
+    'seychelles.png',
+    'south africa.png',
     'sweden.png',
-    'tanzania.png',*/
+    'tanzania.png',
     'usa.png'
 ];
 
@@ -57,7 +62,8 @@ function checkGuess() {
         checkMark.style.display = "inline-flex";
         increaseScore();
         setTimeout(hideCheckMark, 750);
-        setTimeout(getRandomFlag, 750);
+        //setTimeout(getRandomFlag, 750);
+        getRandomFlag();
     }
     flagForm.reset();
 }
