@@ -14,3 +14,7 @@ h1 {
 #timer {
     font-size: x-large;
 }
+
+body {
+    background-color: darkgray;
+}

@@ -1,91 +1,4 @@
-let flagArray = [
-    'albania.png',
-    'algeria.png',
-    'andorra.png',
-    'angola.png',
-    'antigua and barbuda.png',
-    'argentina.png',
-    'armenia.png',
-    'australia.png',
-    'austria.png',
-    'azerbaijan.png',
-    'bahamas.png',
-    'bahrain.png',
-    'bangladesh.png',
-    'barbados.png',
-    'belarus.png',
-    'belgium.png',
-    'belize.png',
-    'benin.png',
-    'bhutan.png',
-    'bolivia.png',
-    'bosnia and herzegovina.png',
-    'botswana.png',
-    'brazil.png',
-    'brunei.png',
-    'bulgaria.png',
-    'burkina faso.png',
-    'burundi.png',
-    'cambodia.png',
-    'cameroon.png',
-    'canada.png',
-    'cape verde.png',
-    'central african republic.png',
-    'chad.png',
-    'chile.png',
-    'china.png',
-    'colombia.png',
-    'comoros.png',
-    'costa rica.png',
-    'croatia.png',
-    'cuba.png',
-    'cyprus.png',
-    'czechia.png',
-    'democratic republic of the congo.png',
-    'denmark.png',
-    'djibouti.png',
-    'dominica.png',
-    'dominican republic.png',
-    'ecuador.png',
-    'egypt.png',
-    'el salvador.png',
-    'equatorial guinea.png',
-    'eritrea.png',
-    'estonia.png',
-    'eswatini.png',
-    'ethiopia.png',
-    'fiji.png',
-    'finland.png',
-    'france.png',
-    'germany.png',
-    'iceland.png',
-    'ivory coast.png',
-    'mexico.png',
-    'mozambique.png',
-    'namibia.png',
-    'netherlands.png',
-    'north korea.png',
-    'norway.png',
-    'oman.png',
-    'pakistan.png',
-    'palau.png',
-    'panama.png',
-    'papua new guinea.png',
-    'paraguay.png',
-    'peru.png',
-    'philippines.png',
-    'poland.png',
-    'portugal.png',
-    'qatar.png',
-    'romania.png',
-    'russia.png',
-    'rwanda.png',
-    'seychelles.png',
-    'south africa.png',
-    'sweden.png',
-    'tanzania.png',
-    'usa.png'
-];
+import { flagArray } from './flag_array.js';
 
 let flagsShown = []
 
@@ -97,6 +10,8 @@ let checkMark = document.getElementById("check");
 hideCheckMark();
 trophyImage.style.display = "none";
 
+console.log(flagArray.length);
+
 let score = 0;
 
 let seconds1 = 0;
@@ -105,6 +20,10 @@ let minutes1 = 0;
 let minutes2 = 0;
 
 let clock = setInterval(timer, 1000);
+
+function showScore() {
+    document.getElementById('score').innerHTML = `Score: ${score}/${flagArray.length}`
+}
 
 function getRandomFlag() {
     if (flagsShown.length != flagArray.length) {
@@ -136,8 +55,8 @@ function checkGuess() {
 }
 
 function increaseScore() {
-    document.getElementById("score").innerHTML = `Score: ${score += 1}/${flagArray.length}`;
-    console.log(score);
+    score += 1;
+    showScore();
 }
 
 function hideCheckMark() {
@@ -163,6 +82,6 @@ function timer() {
     document.getElementById("timer").innerHTML = `Time: ${minutes1}${minutes2}:${seconds1}${seconds2}`;
 }
 
-document.getElementById("submitGuess").addEventListener('click', checkGuess);
+showScore();
 
-console.log(flagArray.length);
+document.getElementById("submitGuess").addEventListener('click', checkGuess);
