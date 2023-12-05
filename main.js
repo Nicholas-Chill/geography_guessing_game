@@ -1,16 +1,11 @@
 import { flagArray } from './flag_array.js';
 
-let flagsShown = []
-
-getRandomFlag();
-let flag = document.getElementsByTagName("img");
-let flagForm = document.getElementById("guessFlag");
-let trophyImage = document.getElementById("win");
-let checkMark = document.getElementById("check");
-hideCheckMark();
-trophyImage.style.display = "none";
-
-console.log(flagArray.length);
+const flagForm = document.getElementById("guessFlag");
+const trophyImage = document.getElementById("win");
+const checkMark = document.getElementById("check");
+const startButton = document.getElementById("start");
+const input = document.getElementById("guess");
+const submit = document.getElementById("submit")
 
 let score = 0;
 
@@ -19,7 +14,20 @@ let seconds2 = 0;
 let minutes1 = 0;
 let minutes2 = 0;
 
-let clock = setInterval(timer, 1000);
+let clock;
+
+let flagsShown = []
+
+getRandomFlag();
+
+function startGame() {
+    startButton.disabled = true;
+    //setInterval(checkGuess, 100);
+    clock = setInterval(timer, 1000);
+    input.disabled = false;
+    input.focus();
+    submit.disabled = false;
+}
 
 function showScore() {
     document.getElementById('score').innerHTML = `Score: ${score}/${flagArray.length}`
@@ -41,17 +49,16 @@ function getRandomFlag() {
     }
 }
 
-function checkGuess() {
-    event.preventDefault();
-    const guess = document.getElementById("guess").value.toLowerCase().concat('.png');
+export function checkGuess() {
+    const guess = input.value.toLowerCase().concat('.png');
     if (guess == flagArray[flagsShown[flagsShown.length - 1]]) {
+        submit.click();
         checkMark.style.display = "inline-flex";
         increaseScore();
         setTimeout(hideCheckMark, 750);
-        //setTimeout(getRandomFlag, 750);
         getRandomFlag();
+        flagForm.reset();
     }
-    flagForm.reset();
 }
 
 function increaseScore() {
@@ -79,9 +86,14 @@ function timer() {
     } else {
         seconds2++;
     }
+
     document.getElementById("timer").innerHTML = `Time: ${minutes1}${minutes2}:${seconds1}${seconds2}`;
 }
 
 showScore();
 
-document.getElementById("submitGuess").addEventListener('click', checkGuess);
+hideCheckMark();
+trophyImage.style.display = "none";
+
+startButton.addEventListener('click', startGame);
+flagForm.addEventListener('input', checkGuess);

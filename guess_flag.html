@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess The Flag</title>
     <link rel="stylesheet" href="main.css">
+    <script src="main.js" type="module"></script>
 </head>
 <body>
     <nav>
@@ -13,16 +14,16 @@
     </nav>
     <div id="guess-flag-game">
     <h1 id="game-title">Guess The Flag</h1>
+    <button id="start">Start</button>
     <p id="timer">Time: 00:00</p>
     <p id="score"></p>
-    <img alt="flag" width="384" height="234" id="flag">
-    <form id="guessFlag">
-        <input type="text" id="guess" name="guess" autofocus autocomplete="off">
-        <input type="submit" id="submitGuess" value="Guess">
-        <img src="check.png" alt="correct" width="50" height="50" id="check">
+    <img alt="flag" id="flag">
+    <form id="guessFlag" onsubmit="return false;">
+        <input type="text" id="guess" name="guess" autocomplete="off" disabled autofocus>
+        <input type="submit" id="submit" value="Guess" disabled hidden>
+        <img src="check.png" alt="correct" width="40" height="40" id="check">
     </form>
     <img src =win.png width="400" height="450" id="win">
     </div>
-    <script src="main.js" type="module"></script>
 </body>
 </html>

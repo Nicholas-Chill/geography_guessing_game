@@ -18,3 +18,12 @@ h1 {
 body {
     background-color: darkgray;
 }
+
+#guessFlag {
+    margin-top: 1%;
+}
+
+#flag {
+    max-width: 20%;
+    max-height: 20%;
+}
