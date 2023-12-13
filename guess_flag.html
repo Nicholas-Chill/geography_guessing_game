@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess The Flag</title>
     <link rel="stylesheet" href="main.css">
-    <script src="main.js" type="module"></script>
 </head>
 <body>
     <nav>
@@ -14,7 +13,11 @@
     </nav>
     <div id="guess-flag-game">
     <h1 id="game-title">Guess The Flag</h1>
-    <button id="start">Start</button>
+    <button type="button" id="start">Start</button>
+    <button type="button" id="last">Previous</button>
+    <button type="button" id="next">Next</button>
+    <button type="button" id="end">Give Up</button>
+    <button type="button" id="restart">Restart</button>
     <p id="timer">Time: 00:00</p>
     <p id="score"></p>
     <img alt="flag" id="flag">
@@ -25,5 +28,6 @@
     </form>
     <img src =win.png width="400" height="450" id="win">
     </div>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
