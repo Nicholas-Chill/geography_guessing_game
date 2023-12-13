@@ -62,14 +62,13 @@ export function checkGuess() {
     if (guess == flagOrder[currentFlagIndex]) {
         submit.click();
         flagOrder.splice(currentFlagIndex, 1);
-        checkMark.style.display = "inline-flex";
+        //checkMark.style.display = "inline-flex";
         increaseScore();
         setTimeout(hideCheckMark, 750);
         if (currentFlagIndex == flagOrder.length) {
             currentFlagIndex = 0;
         }
         showFlag(flagOrder[currentFlagIndex]);
-        console.log(currentFlagIndex);
         flagForm.reset();
     }
 }
@@ -149,6 +148,7 @@ function giveUp() {
     next.disabled = true;
     input.disabled = true;
     restart.disabled = false;
+    endGame.disabled = true;
 }
 
 function createFlagOrder() {
@@ -172,6 +172,7 @@ function restartGame() {
     restart.disabled = true;
     startButton.disabled = false;
     endGame.disabled = true;
+    trophyImage.style.display = "none";
 }
 
 showScore();
