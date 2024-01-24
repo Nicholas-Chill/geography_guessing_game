@@ -62,7 +62,7 @@ export function checkGuess() {
     if (guess == flagOrder[currentFlagIndex]) {
         submit.click();
         flagOrder.splice(currentFlagIndex, 1);
-        //checkMark.style.display = "inline-flex";
+        checkMark.style.display = "inline-flex";
         increaseScore();
         setTimeout(hideCheckMark, 750);
         if (currentFlagIndex == flagOrder.length) {
@@ -137,6 +137,8 @@ function showFlag(flag) {
         previous.disabled = true;
         next.disabled = true;
         input.disabled = true;
+        endGame.disabled = true;
+        restart.disabled = false;
     } else {
         flagImage.src = `./flags/${flag}`;
     }
