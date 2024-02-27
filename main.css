@@ -27,3 +27,8 @@ body {
     max-width: 20%;
     max-height: 20%;
 }
+
+.choices {
+    padding: 20px 30px;
+    color: black;
+}
