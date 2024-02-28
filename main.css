@@ -32,3 +32,9 @@ body {
     padding: 20px 30px;
     color: black;
 }
+
+#win {
+    position: absolute;
+    top: 330px;
+    right: 250px;
+}

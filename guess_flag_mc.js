@@ -1,7 +1,6 @@
 import { flagArray } from './flag_array.js';
 
 const trophyImage = document.getElementById("win");
-const checkMark = document.getElementById("check");
 const startButton = document.getElementById("start");
 const next = document.getElementById("next");
 const previous = document.getElementById("last");
@@ -52,22 +51,35 @@ function getRandomFlagIndex() {
 
 export function checkGuess() {
     if (guess.concat(".png") == flagOrder[currentFlagIndex]) {
-        buttonClicked.style.backgroundColor = 'green';
         increaseScore();
+        if (score != flagArray.length) {
+            flagOrder.splice(currentFlagIndex, 1);
+            setTimeout(showFlag(flagOrder[currentFlagIndex]), 750);
+            setTimeout(randomChoiceOptions, 750);
+        }
+        buttonClicked.style.backgroundColor = 'green';
         setTimeout(changeChoicesColorToWhite, 750);
-        setTimeout(getNextFlag, 750);
     } else {
         buttonClicked.style.backgroundColor = 'red';
+    }
+
+    if (score == flagArray.length) {
+        trophyImage.style.display = "inline-flex";
+        previous.disabled = true;
+        next.disabled = true;
+        input.disabled = true;
+        endGame.disabled = true;
+        restart.disabled = false;
+        choice1.disabled = true;
+        choice2.disabled = true;
+        choice3.disabled = true;
+        choice4.disabled = true;
     }
 }
 
 function increaseScore() {
     score += 1;
     showScore();
-}
-
-function hideCheckMark() {
-    checkMark.style.display = "none";
 }
 
 function getNextFlag() {
@@ -96,16 +108,7 @@ function getPreviousFlag() {
 }
 
 function showFlag(flag) {
-    if (flagOrder.length == 0) {
-        trophyImage.style.display = "inline-flex";
-        previous.disabled = true;
-        next.disabled = true;
-        input.disabled = true;
-        endGame.disabled = true;
-        restart.disabled = false;
-    } else {
-        flagImage.src = `./flags/${flag}`;
-    }
+    flagImage.src = `./flags/${flag}`;
 }
 
 function giveUp() {
@@ -171,8 +174,6 @@ function changeChoicesColorToWhite() {
 
 showScore();
 
-hideCheckMark();
-
 startButton.addEventListener('click', startGame);
 next.addEventListener('click', () => {
     changeChoicesColorToWhite();
@@ -213,4 +214,4 @@ showFlag(flagOrder[0]);
 
 randomChoiceOptions();
 
-console.log(choices);
+console.log(flagOrder);
