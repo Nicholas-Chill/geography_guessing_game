@@ -13,10 +13,12 @@ const choice3 = document.getElementById("choice3");
 const choice4 = document.getElementById("choice4");
 const choices = document.getElementsByClassName("choices");
 
+let currentFlagIndex = 0;
 let score = 0;
 let flagOrder = [];
 let guess = "";
 var buttonClicked; 
+let flagsAndChoices = {}
 
 choice1.disabled = true;
 choice2.disabled = true;
@@ -37,6 +39,10 @@ function startGame() {
     choice2.disabled = false;
     choice3.disabled = false;
     choice4.disabled = false;
+
+    createFlagOrder();
+    showFlag(flagOrder[0]);
+    assignFlagToButton();
 }
 
 function showScore() {
@@ -53,17 +59,19 @@ export function checkGuess() {
     if (guess.concat(".png") == flagOrder[currentFlagIndex]) {
         increaseScore();
         if (score != flagArray.length) {
+            buttonClicked.style.backgroundColor = 'green';
             flagOrder.splice(currentFlagIndex, 1);
-            setTimeout(showFlag(flagOrder[currentFlagIndex]), 750);
-            setTimeout(randomChoiceOptions, 750);
+            setTimeout(showFlag, 750, flagOrder[currentFlagIndex]);
+            setTimeout(assignFlagToButton, 750);
+            setTimeout(changeChoicesColorToWhite, 750);
         }
-        buttonClicked.style.backgroundColor = 'green';
-        setTimeout(changeChoicesColorToWhite, 750);
     } else {
         buttonClicked.style.backgroundColor = 'red';
     }
 
     if (score == flagArray.length) {
+        buttonClicked.style.backgroundColor = 'green';
+        setTimeout(changeChoicesColorToWhite, 750);
         trophyImage.style.display = "inline-flex";
         previous.disabled = true;
         next.disabled = true;
@@ -91,7 +99,7 @@ function getNextFlag() {
 
     currentFlagIndex = nextFlagIndex;
     showFlag(flagOrder[nextFlagIndex]);
-    randomChoiceOptions();
+    assignFlagToButton();
 }
 
 function getPreviousFlag() {
@@ -104,7 +112,7 @@ function getPreviousFlag() {
     currentFlagIndex = lastFlagIndex;
 
     showFlag(flagOrder[lastFlagIndex]);
-    randomChoiceOptions();
+    assignFlagToButton();
 }
 
 function showFlag(flag) {
@@ -130,6 +138,10 @@ function createFlagOrder() {
         }
         flagOrder.push(flagArray[randomIndex]);
     }
+
+    for (let i = 0; i < flagArray.length; i++) {
+        randomChoiceOptions(i);
+    }
 }
 
 function restartGame() {
@@ -138,37 +150,51 @@ function restartGame() {
     score = 0;
     showScore();
     flagOrder = [];
-    createFlagOrder();
+    //createFlagOrder();
     showFlag(flagOrder[0]);
-    randomChoiceOptions();
+    //randomChoiceOptions();
     restart.disabled = true;
     startButton.disabled = false;
     endGame.disabled = true;
     trophyImage.style.display = "none";
 }
 
-function randomChoiceOptions() {
+
+function randomChoiceOptions(flag) {
     let choices = [choice1, choice2, choice3, choice4];
     const randomChoiceAnswer = choices[Math.floor(Math.random() * choices.length)];
-    choices.splice(choices.indexOf(randomChoiceAnswer), 1);
-    randomChoiceAnswer.innerHTML = flagOrder[currentFlagIndex].replace(".png", "");
+    //choices.splice(choices.indexOf(randomChoiceAnswer), 1);
 
     let flagOptions = [];
     for (let i = 0; i < choices.length; i++) {
-        let flagIndex = getRandomFlagIndex();
-        let flag = flagArray[flagIndex];
-        while (flagOptions.includes(flag) || flag == flagOrder[currentFlagIndex]) {
-            flagIndex = getRandomFlagIndex();
-            flag = flagArray[flagIndex];
+        if (choices[i] == randomChoiceAnswer) {
+            flagOptions.push(flagOrder[flag]);
+            continue;
         }
-        flagOptions.push(flag);
-        choices[i].innerHTML = flagOptions[i].replace(".png", "");
+
+        let randomFlagIndex = getRandomFlagIndex();
+        let randomFlag = flagArray[randomFlagIndex];
+        while (flagOptions.includes(randomFlag) || randomFlag == flagOrder[randomFlag]) {
+            randomFlagIndex = getRandomFlagIndex();
+            randomFlag = flagArray[randomFlagIndex];
+        }
+        flagOptions.push(randomFlag);
     }
+
+    flagsAndChoices[flagOrder[flag]] = flagOptions;
 }
 
 function changeChoicesColorToWhite() {
     for (let i = 0; i < choices.length; i++) {
         choices[i].style.backgroundColor = "white";
+    }
+}
+
+function assignFlagToButton() {
+    const choices = [choice1, choice2, choice3, choice4]
+    let flags = flagsAndChoices[flagOrder[currentFlagIndex]];
+    for (let i = 0; i < flags.length; i++) {
+        choices[i].innerHTML = flags[i].replace(".png", "");
     }
 }
 
@@ -205,13 +231,3 @@ choice4.addEventListener('click', (e) => {
     buttonClicked = choice4;
     checkGuess();
 });
-
-createFlagOrder();
-
-let currentFlagIndex = 0;
-
-showFlag(flagOrder[0]);
-
-randomChoiceOptions();
-
-console.log(flagOrder);
